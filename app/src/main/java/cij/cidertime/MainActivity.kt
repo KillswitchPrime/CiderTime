@@ -1,4 +1,4 @@
-package com.example.cidertime
+package cij.cidertime
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,12 +9,30 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.example.cidertime.R
 import com.example.cidertime.databinding.ActivityMainBinding
+import java.io.BufferedReader
+import java.io.FileInputStream
+import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity() {
-
+    private val fileName = "CiderTimeDataStorage"
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private val fileInputStream: FileInputStream by lazy {
+        openFileInput(fileName)
+    }
+
+    private val inputStreamReader: InputStreamReader by lazy{
+        InputStreamReader(fileInputStream)
+    }
+
+    private val bufferedReader: BufferedReader by lazy{
+        BufferedReader(inputStreamReader)
+    }
+
+    private val stringBuilder: StringBuilder = StringBuilder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +46,6 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.addLabel.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
-        binding.addBeverage.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
