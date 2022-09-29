@@ -72,6 +72,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val labelList: RecyclerView = this.findViewById(R.id.labelList)
+        labelList.layoutManager = linearLayoutManager
+        labelList.adapter = labelAdapter
     }
 
     private fun getDataFromStorage(): List<Label>{
